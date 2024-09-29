@@ -66,6 +66,35 @@ export default function HomePage() {
             ):null
           }
         </View>
+        
+        <View className="m-4 flex justify-around flex-1 mb-2">
+          <Text className="text-white text-center text-2xl font-bold">
+            Istanbul,
+           <Text className="text-lg font-semibold text-gray-300">
+            Turkiye
+           </Text>
+          </Text>
+           <View className="flex-row justify-center">
+             <Image source={require('../assets/sun.png')}
+             className="w-52 h-52"/>
+
+           </View>
+
+           <View className="space-y-2">
+             <Text className="text-center font-bold text-white text-6xl ml-5">
+              23&#176;
+             </Text>
+             <Text className="text-center font-bold text-white text-xl tracking-widest">
+              Sunny
+             </Text>
+           </View>
+           <View className="flex-row justify-between mx-4">
+            <View className="flex-row space-x-2 items-center">
+              <Image source={require('../assets/windIcon.png')} className="h-6 w-6"/>
+              <Text className="text-white font-semibold text-base">22km</Text>
+            </View>
+           </View>
+        </View>
     </View>
   )
 }
