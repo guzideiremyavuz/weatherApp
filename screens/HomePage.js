@@ -25,7 +25,7 @@ export default function HomePage() {
         <View className="flex flex-1">
           <View style={{height: '10%',marginTop: 20}} className="mx-4 relative z-50" >
             <View className="flex-row justify-end items-center rounded-full"
-            style={{backgroundColor: showSearch? theme.bgWhite(1):'transparent', 
+            style={{backgroundColor: showSearch? theme.bgWhite(0.8):'transparent', 
             padding:5,
             }}
           >
@@ -70,21 +70,26 @@ export default function HomePage() {
           }
         </View>
         
-        <View className="m-4 flex justify-around flex-1 mb-15" >
-          <Text className="text-white text-center text-2xl font-bold mb-20">
+        <View className="m-2 flex justify-around flex-1 mb-16" >
+          <View className="items-center space-y-4">
+          <Text 
+          className="text-white text-center text-2xl font-bold ">
             Istanbul,
            <Text className="text-lg font-semibold text-gray-300">
             Turkiye
            </Text>
           </Text>
 
-           <View className="flex-row justify-center mb-15">
-             <Image source={require('../assets/sun.png')}
-             className="w-52 h-52"/>
-
+           <View className="flex-row justify-center mb-20">
+             <Image 
+             source={require('../assets/sun.png')}
+             className="w-48 h-48"
+             />
+             </View>
            </View>
 
-           <View className="space-y-2 mb-10">
+
+           <View className="space-y-2 mb-10 mt-8">
              <Text className="text-center font-bold text-white text-6xl ml-5 mt-20">
               23&#176;
              </Text>
@@ -92,7 +97,9 @@ export default function HomePage() {
               Sunny
              </Text>
            </View>
-           <View className="flex-row justify-between mx-4 mb-10">
+
+           <View className="flex-row justify-between mx-4 mb-10 mt-16">
+            
             <View className="flex-row space-x-2 items-center">
               <Image source={require('../assets/windIcon.png')} className="h-6 w-6"/>
               <Text className="text-white font-semibold text-base">22km
@@ -112,7 +119,7 @@ export default function HomePage() {
            </View>
         </View>
         {/*diğer günler için hava*/}
-        <View className="mb-2 space-y-3">
+        <View className="mb-6 space-y-3">
           <View className="flex-row items-center mx-5 space-x-2 mt-5">
             <CalendarDaysIcon size={22} color="white"/>
             <Text className="text-white text-base">Daily forecast</Text>
