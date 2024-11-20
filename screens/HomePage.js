@@ -1,18 +1,38 @@
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { theme } from '../theme'
+import {debounce} from 'lodash';/* arama kısmına yazı yazdığımızda yazının tamamlanlmasını beklemeye yarıyor, tamamlandıktan sonra api çağrısı yaptırıyor */
+
 import {CalendarDaysIcon, MagnifyingGlassIcon, } from 'react-native-heroicons/outline'
 import { MapPinIcon} from 'react-native-heroicons/solid'
+import { fetchLocations, fetchWeatherForecast } from '../api/weather';
 
 
 export default function HomePage() {
   const [showSearch, toggleSearch] = useState(false);
-  const[locations, setLocations] = useState([1,2,3]);
+  const[locations, setLocations] = useState([]);
 
   const handleLocation = (loc)=>{
     console.log('location: ',loc);
+    setLocations([]);
+    fetchWeatherForecast({
+      cityName: loc.name,
+      days: '7'
+    }).then(data=>{
+      console.log('got forecast: ',data);
+    })
   }
+
+  const handleSearch= value=>{
+    if(value.length>2){
+      fetchLocations({cityName: value}).then(data=>{
+      setLocations(data);
+      })
+    }
+  }
+  const handleTextDebounce = useCallback(debounce(handleSearch,1200),[])
+
 
   return (
     <View className="flex-1 relative">
@@ -32,6 +52,7 @@ export default function HomePage() {
               {
                 showSearch? (
                   <TextInput 
+                  onChangeText={handleTextDebounce}
                   placeholder='Search city' 
                   placeholderTextColor={'lightgray'}
                   style={{paddingHorizontal: 10, paddingVertical: 8, color: 'lightgray', flex: 1}}
@@ -60,7 +81,7 @@ export default function HomePage() {
                       key={index}
                       className={"flex-row items-center border-0 p-3 px-4 mb-1" +borderClass}>
                         <MapPinIcon size="20" color="gray"/>
-                        <Text className="text-black text-lg ml-2">Istanbul, Turkiye </Text>
+                        <Text className="text-black text-lg ml-2">{loc?.name}, {loc?.country} </Text>
                       </TouchableOpacity>
                     )
                   })
