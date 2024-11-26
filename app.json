@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "name": "weatherApp",
     "slug": "weatherApp",
     "version": "1.0.0",
